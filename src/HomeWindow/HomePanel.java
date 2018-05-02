@@ -1,53 +1,72 @@
 package HomeWindow;
 
+import Config.AppConsts;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
-public class HomePanel extends JPanel {
+class HomePanel extends JPanel {
+    private final int FONT_SIZE = 30;
+    private Container pane;
 
-    public HomePanel(Container pane) {
-        HomePanel.addComponentsToPane(pane);
+    HomePanel(Container pane) {
+        this.pane = pane;
+        this.addComponentsToPane();
     }
 
-    public static void addComponentsToPane(Container pane) {
-//        JPanel mainPanel = new JPanel(new GridLayout(0, 1));
-        JPanel gridPanel = new JPanel(new GridLayout(0, 1));
 
-        JLabel title = new JLabel("Memory The Game");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Tahoma", Font.BOLD, 20));
-        JPanel titleRow = new JPanel(new FlowLayout());
-        titleRow.add(title);
-        gridPanel.add(titleRow);
+    private void addComponentsToPane() {
+        JPanel gridPanel = new JPanel(new GridLayout(8, 1));
 
-        JLabel studentLabel = new JLabel("s17265");
-        title.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        pane.add(new JPanel().add(studentLabel));
-        gridPanel.add(studentLabel);
-        JPanel studentTextFieldPanel = new JPanel();
-        studentTextFieldPanel.add(studentLabel);
-        gridPanel.add(studentTextFieldPanel);
+        addTitleRow(gridPanel);
+        addStudentRow(gridPanel);
+        addNewGameButton(gridPanel);
+        addComponentToPanel(this.createButton("Hight Scores"), gridPanel);
+        addExitButton(gridPanel);
 
-        addAButton("New game", gridPanel);
-        addAButton("Hight Scores", gridPanel);
-        addAButton("Exit", gridPanel);
-
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(gridPanel, BorderLayout.NORTH);
-
-        pane.add(mainPanel);
-
+        pane.add(gridPanel);
     }
 
-    private static void addAButton(String text, JPanel panel) {
-        JButton button = new JButton(text);
-        HomePanel.addComponentToPanel(button, panel);
-    }
-
-    private static void addComponentToPanel(JComponent component, JPanel panel) {
-        component.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JPanel row = new JPanel();
+    private void addComponentToPanel(JComponent component, JPanel panel) {
+        JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 20));
         row.add(component);
         panel.add(row);
+    }
+
+    private void addExitButton(JPanel panel) {
+        JButton button = this.createButton("Exit");
+        button.addActionListener((ActionEvent e) -> {
+            System.exit(0);
+        });
+        this.addComponentToPanel(button, panel);
+    }
+
+    private void addNewGameButton(JPanel gridPanel) {
+        JButton button = this.createButton("NewGame");
+        button.setForeground(Color.WHITE);
+        button.setBackground(AppConsts.MAIN_COLOR);
+        this.addComponentToPanel(button, gridPanel);
+    }
+
+    private void addStudentRow(JPanel panel) {
+        JLabel label = new JLabel("s17265");
+        label.setFont(new Font(AppConsts.MAIN_FONT, Font.PLAIN, FONT_SIZE));
+        this.addComponentToPanel(label, panel);
+    }
+
+    private void addTitleRow(JPanel panel) {
+        JLabel label = new JLabel("Memory The Game");
+        label.setFont(new Font(AppConsts.MAIN_FONT, Font.BOLD, FONT_SIZE));
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.addComponentToPanel(label, panel);
+    }
+
+    private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font(AppConsts.MAIN_FONT, Font.PLAIN, FONT_SIZE));
+        button.setFocusPainted(false);
+        button.setPreferredSize(new Dimension(280, 60));
+        return button;
     }
 }
