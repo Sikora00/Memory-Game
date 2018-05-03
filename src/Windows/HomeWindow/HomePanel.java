@@ -1,6 +1,7 @@
-package HomeWindow;
+package Windows.HomeWindow;
 
-import Config.AppConsts;
+import Configs.Fonts;
+import Configs.Palette;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,26 +46,26 @@ class HomePanel extends JPanel {
     private void addNewGameButton(JPanel gridPanel) {
         JButton button = this.createButton("NewGame");
         button.setForeground(Color.WHITE);
-        button.setBackground(AppConsts.MAIN_COLOR);
+        button.setBackground(Palette.MAIN_COLOR);
         this.addComponentToPanel(button, gridPanel);
     }
 
     private void addStudentRow(JPanel panel) {
         JLabel label = new JLabel("s17265");
-        label.setFont(new Font(AppConsts.MAIN_FONT, Font.PLAIN, FONT_SIZE));
+        label.setFont(new Font(Fonts.MAIN_FONT, Font.PLAIN, FONT_SIZE));
         this.addComponentToPanel(label, panel);
     }
 
     private void addTitleRow(JPanel panel) {
         JLabel label = new JLabel("Memory The Game");
-        label.setFont(new Font(AppConsts.MAIN_FONT, Font.BOLD, FONT_SIZE));
+        label.setFont(new Font(Fonts.MAIN_FONT, Font.BOLD, FONT_SIZE));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.addComponentToPanel(label, panel);
     }
 
     private JButton createButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font(AppConsts.MAIN_FONT, Font.PLAIN, FONT_SIZE));
+        button.setFont(new Font(Fonts.MAIN_FONT, Font.PLAIN, FONT_SIZE));
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(280, 60));
         return button;
