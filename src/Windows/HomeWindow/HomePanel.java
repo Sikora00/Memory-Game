@@ -2,6 +2,7 @@ package Windows.HomeWindow;
 
 import Configs.Fonts;
 import Configs.Palette;
+import Windows.RankingView.RankingView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ class HomePanel extends JPanel {
         addTitleRow(gridPanel);
         addStudentRow(gridPanel);
         addNewGameButton(gridPanel);
-        addComponentToPanel(this.createButton("Hight Scores"), gridPanel);
+        addRankingButton(gridPanel);
         addExitButton(gridPanel);
 
         pane.add(gridPanel);
@@ -47,6 +48,12 @@ class HomePanel extends JPanel {
         JButton button = this.createButton("NewGame");
         button.setForeground(Color.WHITE);
         button.setBackground(Palette.MAIN_COLOR);
+        this.addComponentToPanel(button, gridPanel);
+    }
+
+    private void addRankingButton(JPanel gridPanel) {
+        JButton button = this.createButton("Hight Scores");
+        button.addActionListener((ActionEvent e) -> new RankingView());
         this.addComponentToPanel(button, gridPanel);
     }
 

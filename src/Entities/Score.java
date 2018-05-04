@@ -12,4 +12,9 @@ public class Score implements Serializable<Score> {
         this.timeInSeconds = timeInSeconds;
         this.pairs = pairs;
     }
+
+    public Object[] toArray() {
+        Object[] result = {new Integer(500), user.getName(), new Integer(pairs), Integer.toString(timeInSeconds)};
+        return result;
+    }
 }

@@ -2,10 +2,12 @@ package Services;
 
 import Configs.Paths;
 import Entities.Ranking;
+import Interfaces.Serializable;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class RankingService {
     private static File storage = new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "storage/ranking.txt");
@@ -16,4 +18,19 @@ public class RankingService {
         fw.write(output);
         fw.close();
     }
+
+    public static Ranking readRankingFromStorage() throws IOException {
+
+        StringBuilder fileContents = new StringBuilder((int) storage.length());
+        Scanner scanner = new Scanner(storage);
+        fileContents.append(scanner.nextLine());
+        try {
+            return (Ranking) Serializable.deserialize(fileContents.toString());
+        } catch (ClassNotFoundException e) {
+            return null;
+        } finally {
+            scanner.close();
+        }
+    }
+
 }
