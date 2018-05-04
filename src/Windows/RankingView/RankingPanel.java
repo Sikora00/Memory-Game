@@ -19,8 +19,8 @@ class RankingPanel extends JPanel {
         String[] columnNames = {
                 "Score",
                 "User",
-                "Time",
-                "Pairs"};
+                "Pairs",
+                "Time"};
 
         Object[][] data = new Object[0][];
         try {
