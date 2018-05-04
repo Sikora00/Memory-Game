@@ -1,15 +1,16 @@
 package Windows.RankingView;
 
-import Entities.Ranking;
-import Entities.Score;
-import Entities.User;
+import Windows.HomeWindow.HomeView;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class RankingView implements Runnable{
+public class RankingWindow implements Runnable{
 
-    public RankingView() {
-        createAndShowGUI();
+    public RankingWindow() {
+//        createAndShowGUI();
     }
     /**
      * Create the GUI and show it.  For thread safety,
@@ -19,11 +20,17 @@ public class RankingView implements Runnable{
     private static void createAndShowGUI() {
 
         JFrame frame = new JFrame("Ranking");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         RankingPanel panel = new RankingPanel();
         frame.setContentPane(panel);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                HomeView.createAndShowGUI();
+            }
+        });
+
 
         frame.pack();
         frame.setVisible(true);

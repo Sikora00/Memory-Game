@@ -2,7 +2,8 @@ package Windows.HomeWindow;
 
 import Configs.Fonts;
 import Configs.Palette;
-import Windows.RankingView.RankingView;
+import Windows.NewGameWindow.NewGameWindow;
+import Windows.RankingView.RankingWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,11 @@ import java.awt.event.ActionEvent;
 class HomePanel extends JPanel {
     private final int FONT_SIZE = 30;
     private Container pane;
+    private JFrame frame;
 
-    HomePanel(Container pane) {
-        this.pane = pane;
+    HomePanel(JFrame frame) {
+        this.frame = frame;
+        this.pane = frame.getContentPane();
         this.addComponentsToPane();
     }
 
@@ -48,12 +51,16 @@ class HomePanel extends JPanel {
         JButton button = this.createButton("NewGame");
         button.setForeground(Color.WHITE);
         button.setBackground(Palette.MAIN_COLOR);
+        button.addActionListener((ActionEvent e) -> javax.swing.SwingUtilities.invokeLater(new NewGameWindow()));
         this.addComponentToPanel(button, gridPanel);
     }
 
     private void addRankingButton(JPanel gridPanel) {
         JButton button = this.createButton("Hight Scores");
-        button.addActionListener((ActionEvent e) -> new RankingView());
+        button.addActionListener((ActionEvent e) -> {
+            javax.swing.SwingUtilities.invokeLater(new RankingWindow());
+            this.frame.dispose();
+        });
         this.addComponentToPanel(button, gridPanel);
     }
 
