@@ -23,6 +23,9 @@ public class NewGameWindow implements Runnable{
         int pairs = 0;
         while (pairs == 0){
             NewGameDialog insertPairsDialog = new NewGameDialog(frame);
+            if(insertPairsDialog.isClosed()) {
+                break;
+            }
             pairs = insertPairsDialog.getPairs();
         }
 
