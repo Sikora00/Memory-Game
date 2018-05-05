@@ -1,67 +1,73 @@
 package Windows.Game;
 
 import Configs.Fonts;
+import Configs.Paths;
+import Helpers.Helper;
 import Services.RankingService;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GamePanel extends JPanel{
-
-    GamePanel() {
-        super(new GridLayout(1, 3));
-        addComponentToPanel(new JLabel(), this, null);
-
+    private int cardsNumber;
+    GamePanel(int cardsNumber) {
+        super();
+        this.cardsNumber = cardsNumber;
         JPanel content = new JPanel(new GridBagLayout());
-        addComponentToPanel(new JLabel(), content, null);
-        this.addTitleRow(content);
-        String[] columnNames = {
-                "Score",
-                "User",
-                "Pairs",
-                "Time"};
 
-        Object[][] data = new Object[0][];
-        try {
-            data = RankingService.readRankingFromStorage().toArray();
-        } catch (IOException e) {
-            e.printStackTrace();
+        this.addTitleRow(content);
+
+        int cols = 0;
+        for (int i = 6; i > 0; i--) {
+            if(this.cardsNumber % i == 0) {
+                cols = i;
+                break;
+            }
         }
 
-        final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        table.setFillsViewportHeight(true);
+        final JPanel cards = new JPanel(new GridLayout(0, cols));
         GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.VERTICAL;
-        c.weightx = 0.0;
-        c.gridwidth = 3;
         c.gridx = 0;
-        c.gridwidth = 10;
+        c.gridy = 1;
 
-        JScrollPane scrollPane = new JScrollPane(table);
+        for (int i = 1; i <= this.cardsNumber; i++) {
+            this.addCard(cards);
+        }
 
-        addComponentToPanel(scrollPane, content, c);
+        addComponentToPanel(cards, content, c);
 
-        JPanel tmp = new JPanel();
-        tmp.add(content);
-        add(tmp);
-        addComponentToPanel(new JLabel(), this, null);
+        add(content);
     }
 
     private void addTitleRow(JPanel panel) {
         JLabel label = new JLabel("High Scores");
         label.setFont(new Font(Fonts.MAIN_FONT, Font.BOLD, 30));
         GridBagConstraints c = new GridBagConstraints();
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        c.fill = GridBagConstraints.VERTICAL;
-        c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 1;
+        c.ipady = 80;
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         addComponentToPanel(label, panel, c);
     }
 
+    private void addCard(JPanel panel) {
+        BufferedImage myPicture = null;
+        try {
+            myPicture = ImageIO.read(new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "img/card-background.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JLabel picLabel = new JLabel(new ImageIcon(new ImageIcon(myPicture).getImage().getScaledInstance(200, 300, Image.SCALE_DEFAULT)));
+        JPanel card = new JPanel();
+        card.add(picLabel);
+        this.addComponentToPanel(card, panel, null);
+    }
+
     private void addComponentToPanel(JComponent component, JPanel panel, GridBagConstraints options) {
+//        Helper.addComponentToPanel(component, panel, options);
         panel.add(component, options);
     }
 }

@@ -31,7 +31,7 @@ class NewGameDialog {
         if (pairsInputValue != null && !pairsInputValue.isEmpty()) {
             try {
                 int n = Integer.parseInt(pairsInputValue);
-                if (n > 0 && n % 2 == 0) {
+                if (n > 0) {
                     return n;
                 }
             } catch (NumberFormatException e) {

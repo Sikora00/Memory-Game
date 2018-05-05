@@ -34,7 +34,7 @@ public class NewGameWindow implements Runnable{
         }
 
         if(pairs != 0) {
-            javax.swing.SwingUtilities.invokeLater(new GameWindow());
+            new GameWindow(pairs);
             this.parent.dispose();
         }
 

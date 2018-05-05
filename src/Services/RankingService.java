@@ -27,7 +27,6 @@ public class RankingService {
         StringBuilder fileContents = new StringBuilder((int) storage.length());
         Scanner scanner = new Scanner(storage);
         fileContents.append(scanner.nextLine());
-        String serializedRanking = fileContents.toString();
         try {
             return (Ranking) Serializable.deserialize(fileContents.toString());
         } catch (ClassNotFoundException e) {
