@@ -1,16 +1,9 @@
 package Windows.Game;
 
 import Configs.Fonts;
-import Configs.Paths;
-import Helpers.Helper;
-import Services.RankingService;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GamePanel extends JPanel{
     private int cardsNumber;
@@ -54,20 +47,11 @@ public class GamePanel extends JPanel{
     }
 
     private void addCard(JPanel panel) {
-        BufferedImage myPicture = null;
-        try {
-            myPicture = ImageIO.read(new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "img/card-background.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JLabel picLabel = new JLabel(new ImageIcon(new ImageIcon(myPicture).getImage().getScaledInstance(200, 300, Image.SCALE_DEFAULT)));
-        JPanel card = new JPanel();
-        card.add(picLabel);
+        Card card = new Card();
         this.addComponentToPanel(card, panel, null);
     }
 
     private void addComponentToPanel(JComponent component, JPanel panel, GridBagConstraints options) {
-//        Helper.addComponentToPanel(component, panel, options);
         panel.add(component, options);
     }
 }
