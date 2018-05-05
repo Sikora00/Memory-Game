@@ -20,10 +20,14 @@ public class RankingService {
     }
 
     public static Ranking readRankingFromStorage() throws IOException {
-
+        if (storage.length() == 0) {
+            RankingService.replaceOldRanking(new Ranking());
+            return readRankingFromStorage();
+        }
         StringBuilder fileContents = new StringBuilder((int) storage.length());
         Scanner scanner = new Scanner(storage);
         fileContents.append(scanner.nextLine());
+        String serializedRanking = fileContents.toString();
         try {
             return (Ranking) Serializable.deserialize(fileContents.toString());
         } catch (ClassNotFoundException e) {

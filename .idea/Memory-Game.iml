@@ -9,6 +9,8 @@
       <sourceFolder url="file://$MODULE_DIR$/assets" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
     </content>
+    <content url="file://$MODULE_DIR$/dist" />
+    <content url="file://$MODULE_DIR$/dist/production/Memory-Game" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

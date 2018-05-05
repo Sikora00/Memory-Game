@@ -51,7 +51,7 @@ class HomePanel extends JPanel {
         JButton button = this.createButton("NewGame");
         button.setForeground(Color.WHITE);
         button.setBackground(Palette.MAIN_COLOR);
-        button.addActionListener((ActionEvent e) -> javax.swing.SwingUtilities.invokeLater(new NewGameWindow()));
+        button.addActionListener((ActionEvent e) -> javax.swing.SwingUtilities.invokeLater(new NewGameWindow(frame)));
         this.addComponentToPanel(button, gridPanel);
     }
 

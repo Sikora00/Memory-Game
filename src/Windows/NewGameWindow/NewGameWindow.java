@@ -1,11 +1,15 @@
 package Windows.NewGameWindow;
 
 
+import Windows.Game.GameWindow;
+
 import javax.swing.*;
 
 public class NewGameWindow implements Runnable{
     JFrame frame;
-    public NewGameWindow() {
+    JFrame parent;
+    public NewGameWindow(JFrame frame) {
+        this.parent = frame;
 //        NewGameWindow.createAndShowGUI();
     }
 
@@ -27,6 +31,11 @@ public class NewGameWindow implements Runnable{
                 break;
             }
             pairs = insertPairsDialog.getPairs();
+        }
+
+        if(pairs != 0) {
+            javax.swing.SwingUtilities.invokeLater(new GameWindow());
+            this.parent.dispose();
         }
 
         frame.dispose();
