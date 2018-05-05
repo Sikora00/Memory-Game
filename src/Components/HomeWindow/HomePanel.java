@@ -1,9 +1,9 @@
-package Windows.HomeWindow;
+package Components.HomeWindow;
 
+import Components.NewGame.NewGameFrame;
+import Components.Ranking.Ranking;
 import Configs.Fonts;
 import Configs.Palette;
-import Windows.NewGameWindow.NewGameWindow;
-import Windows.RankingView.RankingWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,14 +51,14 @@ class HomePanel extends JPanel {
         JButton button = this.createButton("NewGame");
         button.setForeground(Color.WHITE);
         button.setBackground(Palette.MAIN_COLOR);
-        button.addActionListener((ActionEvent e) -> javax.swing.SwingUtilities.invokeLater(new NewGameWindow(frame)));
+        button.addActionListener((ActionEvent e) -> new NewGameFrame(frame));
         this.addComponentToPanel(button, gridPanel);
     }
 
     private void addRankingButton(JPanel gridPanel) {
         JButton button = this.createButton("Hight Scores");
         button.addActionListener((ActionEvent e) -> {
-            javax.swing.SwingUtilities.invokeLater(new RankingWindow());
+            new Ranking();
             this.frame.dispose();
         });
         this.addComponentToPanel(button, gridPanel);

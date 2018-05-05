@@ -1,4 +1,4 @@
-package Windows.Game;
+package Components.Game;
 
 import Configs.Fonts;
 

@@ -1,4 +1,4 @@
-import Windows.HomeWindow.HomeView;
+import Components.HomeWindow.HomeView;
 
 public class Main {
 

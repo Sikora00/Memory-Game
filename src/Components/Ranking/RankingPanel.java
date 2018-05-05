@@ -1,4 +1,4 @@
-package Windows.RankingView;
+package Components.Ranking;
 
 import Configs.Fonts;
 import Services.RankingService;

@@ -1,11 +1,11 @@
-package Windows.NewGameWindow;
+package Components.Common;
 
 import javax.swing.*;
 
 public class ValidationError {
-    ValidationError(JFrame frame) {
+    public ValidationError(JFrame frame, String message) {
         JOptionPane.showMessageDialog(frame,
-                "Enter the right number ",
+                message,
                 "Validation Error",
                 JOptionPane.ERROR_MESSAGE);
     }

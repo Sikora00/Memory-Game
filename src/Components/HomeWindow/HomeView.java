@@ -1,4 +1,4 @@
-package Windows.HomeWindow;
+package Components.HomeWindow;
 
 import javax.swing.*;
 

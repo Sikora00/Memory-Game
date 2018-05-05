@@ -1,4 +1,6 @@
-package Windows.NewGameWindow;
+package Components.NewGame;
+
+import Components.Common.ValidationError;
 
 import javax.swing.*;
 
@@ -18,7 +20,7 @@ class NewGameDialog {
         try {
             return convertStringInputAndValidate();
         } catch (IllegalArgumentException e) {
-            new ValidationError(frame);
+            new ValidationError(frame, "Enter the right number");
         }
         return 0;
     }
