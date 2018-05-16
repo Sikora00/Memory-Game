@@ -1,22 +1,26 @@
 package Components.Game;
 
 import Configs.Fonts;
+import ValueObjects.TimerValue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel {
     private int cardsNumber;
+
     GamePanel(int cardsNumber) {
         super();
         this.cardsNumber = cardsNumber;
         JPanel content = new JPanel(new GridBagLayout());
 
-        this.addTitleRow(content);
+        this.addTimer(content);
 
         int cols = 0;
         for (int i = 6; i > 0; i--) {
-            if(this.cardsNumber % i == 0) {
+            if (this.cardsNumber % i == 0) {
                 cols = i;
                 break;
             }
@@ -36,13 +40,22 @@ public class GamePanel extends JPanel{
         add(content);
     }
 
-    private void addTitleRow(JPanel panel) {
-        JLabel label = new JLabel("High Scores");
+    private void addTimer(JPanel panel) {
+        JLabel label = new JLabel(new TimerValue().toString());
         label.setFont(new Font(Fonts.MAIN_FONT, Font.BOLD, 30));
         GridBagConstraints c = new GridBagConstraints();
         c.gridy = 0;
         c.ipady = 80;
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        int delay = 1000; //milliseconds
+        ActionListener taskPerformer = (ActionEvent evt) -> {
+            TimerValue value = new TimerValue(label.getText());
+            value.addOneSecond();
+            label.setText(value.toString());
+
+        };
+        new Timer(delay, taskPerformer).start();
+
         addComponentToPanel(label, panel, c);
     }
 
