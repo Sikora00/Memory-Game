@@ -14,11 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class GamePanel extends JPanel implements GameFinishedListener, CardOpenedListener{
+public class GamePanel extends JPanel implements GameFinishedListener, CardOpenedListener {
     private int cardsNumber;
     private int openedCards = 0;
     private Timer timer;
     private Card firstCard;
+    private boolean isOpeningCardsEnable = true;
+    private List<Card> cards;
 
     GamePanel(int cardsPairs) {
         super();
@@ -41,8 +43,8 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
         c.gridx = 0;
         c.gridy = 1;
 
-        List<Card> cardsComponents = CardsFactory.createCardsPairs(cardsPairs);
-        for (Card card : cardsComponents) {
+        this.cards = CardsFactory.createCardsPairs(cardsPairs);
+        for (Card card : this.cards) {
             this.addCard(card, cards);
         }
 
@@ -92,9 +94,30 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
             return;
         }
 
+        if (firstCard.getId() != card.getId()) {
+            Timer timer = new Timer(2000, (ActionEvent arg0) -> {
+                firstCard.closeCard();
+                card.closeCard();
+                openedCards = openedCards - 2;
+                firstCard = null;
+                setOpeningCardsEnable(true);
+            });
+            timer.setRepeats(false);
+            timer.start();
+            setOpeningCardsEnable(false);
+        } else {
+            firstCard = null;
+        }
 
         if (openedCards == cardsNumber) {
             GameFinishedListeners.onGameFinished();
+        }
+    }
+
+    private void setOpeningCardsEnable(boolean openingCardsEnable) {
+        isOpeningCardsEnable = openingCardsEnable;
+        for(Card card : cards) {
+            card.setOpeningEnable(openingCardsEnable);
         }
     }
 }
