@@ -1,6 +1,7 @@
 package Components.Game;
 
 import Components.HomeWindow.HomeView;
+import Events.GameFinished.GameFinishedListeners;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -31,6 +32,9 @@ public class GameFrame extends JFrame {
                 HomeView.createAndShowGUI();
             }
         });
+
+        GameFinishedListeners.addListener(panel);
+
 
 
         pack();

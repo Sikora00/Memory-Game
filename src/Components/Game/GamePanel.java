@@ -1,19 +1,29 @@
 package Components.Game;
 
 import Configs.Fonts;
+import Events.CardOpened.CardOpenedListener;
+import Events.CardOpened.CardOpenedListeners;
+import Events.GameFinished.GameFinishedListener;
+import Events.GameFinished.GameFinishedListeners;
+import Factories.CardsFactory;
 import ValueObjects.TimerValue;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements GameFinishedListener, CardOpenedListener{
     private int cardsNumber;
+    private int openedCards = 0;
+    private Timer timer;
+    private Card firstCard;
 
-    GamePanel(int cardsNumber) {
+    GamePanel(int cardsPairs) {
         super();
-        this.cardsNumber = cardsNumber;
+        CardOpenedListeners.addListener(this);
+        this.cardsNumber = cardsPairs;
         JPanel content = new JPanel(new GridBagLayout());
 
         this.addTimer(content);
@@ -31,8 +41,9 @@ public class GamePanel extends JPanel {
         c.gridx = 0;
         c.gridy = 1;
 
-        for (int i = 1; i <= this.cardsNumber; i++) {
-            this.addCard(cards);
+        List<Card> cardsComponents = CardsFactory.createCardsPairs(cardsPairs);
+        for (Card card : cardsComponents) {
+            this.addCard(card, cards);
         }
 
         addComponentToPanel(cards, content, c);
@@ -54,17 +65,36 @@ public class GamePanel extends JPanel {
             label.setText(value.toString());
 
         };
-        new Timer(delay, taskPerformer).start();
+        timer = new Timer(delay, taskPerformer);
+        timer.start();
 
         addComponentToPanel(label, panel, c);
     }
 
-    private void addCard(JPanel panel) {
-        Card card = new Card();
+    private void addCard(Card card, JPanel panel) {
         this.addComponentToPanel(card, panel, null);
     }
 
     private void addComponentToPanel(JComponent component, JPanel panel, GridBagConstraints options) {
         panel.add(component, options);
+    }
+
+    @Override
+    public void onGameFinished() {
+        timer.stop();
+    }
+
+    @Override
+    public void onCardOpened(Card card) {
+        openedCards++;
+        if (firstCard == null) {
+            firstCard = card;
+            return;
+        }
+
+
+        if (openedCards == cardsNumber) {
+            GameFinishedListeners.onGameFinished();
+        }
     }
 }
