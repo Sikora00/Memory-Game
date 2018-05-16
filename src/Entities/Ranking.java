@@ -3,6 +3,7 @@ package Entities;
 import Interfaces.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Ranking implements Serializable<Ranking> {
@@ -17,6 +18,7 @@ public class Ranking implements Serializable<Ranking> {
     }
 
     public Object[][] toArray() {
+        Collections.sort(scores);
         Object[][] result = new Object[scores.size()][];
         int i = 0;
         for (Score score : scores) {

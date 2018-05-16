@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
     private Card firstCard;
     private boolean isOpeningCardsEnable = true;
     private List<Card> cards;
+    private JLabel timerLabel;
 
     GamePanel(int cardsPairs) {
         super();
@@ -54,23 +55,24 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
     }
 
     private void addTimer(JPanel panel) {
-        JLabel label = new JLabel(new TimerValue().toString());
-        label.setFont(new Font(Fonts.MAIN_FONT, Font.BOLD, 30));
+        JLabel timerLabel = new JLabel(new TimerValue().toString());
+        timerLabel.setFont(new Font(Fonts.MAIN_FONT, Font.BOLD, 30));
         GridBagConstraints c = new GridBagConstraints();
         c.gridy = 0;
         c.ipady = 80;
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        timerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         int delay = 1000; //milliseconds
         ActionListener taskPerformer = (ActionEvent evt) -> {
-            TimerValue value = new TimerValue(label.getText());
+            TimerValue value = new TimerValue(timerLabel.getText());
             value.addOneSecond();
-            label.setText(value.toString());
+            timerLabel.setText(value.toString());
 
         };
         timer = new Timer(delay, taskPerformer);
         timer.start();
+        this.timerLabel = timerLabel;
 
-        addComponentToPanel(label, panel, c);
+        addComponentToPanel(timerLabel, panel, c);
     }
 
     private void addCard(Card card, JPanel panel) {
@@ -119,5 +121,9 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
         for(Card card : cards) {
             card.setOpeningEnable(openingCardsEnable);
         }
+    }
+
+    public JLabel getTimerLabel() {
+        return timerLabel;
     }
 }

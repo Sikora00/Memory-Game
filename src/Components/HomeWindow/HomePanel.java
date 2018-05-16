@@ -1,7 +1,7 @@
 package Components.HomeWindow;
 
 import Components.NewGame.NewGameFrame;
-import Components.Ranking.Ranking;
+import Components.Ranking.RankingFrame;
 import Configs.Fonts;
 import Configs.Palette;
 
@@ -58,7 +58,7 @@ class HomePanel extends JPanel {
     private void addRankingButton(JPanel gridPanel) {
         JButton button = this.createButton("Hight Scores");
         button.addActionListener((ActionEvent e) -> {
-            new Ranking();
+            new RankingFrame();
             this.frame.dispose();
         });
         this.addComponentToPanel(button, gridPanel);

@@ -12,7 +12,9 @@ public class GameFinishedListeners {
 
     public static void onGameFinished() {
 
-        for (GameFinishedListener listener : listeners)
+        for (GameFinishedListener listener : listeners) {
             listener.onGameFinished();
+        }
+        GameFinishedListeners.listeners.clear();
     }
 }

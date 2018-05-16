@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Ranking extends JFrame{
+public class RankingFrame extends JFrame{
 
-    public Ranking() {
+    public RankingFrame() {
         super("Ranking");
         createAndShowGUI();
     }

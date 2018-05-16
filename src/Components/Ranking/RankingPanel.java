@@ -5,7 +5,6 @@ import Services.RankingService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 class RankingPanel extends JPanel {
 
@@ -22,12 +21,7 @@ class RankingPanel extends JPanel {
                 "Pairs",
                 "Time"};
 
-        Object[][] data = new Object[0][];
-        try {
-            data = RankingService.readRankingFromStorage().toArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Object[][] data = RankingService.readRankingFromStorage().toArray();
 
         final JTable table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 500));
