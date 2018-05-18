@@ -4,6 +4,8 @@ import Components.Common.ErrorDialog;
 import Components.Common.UnknowErrorDialog;
 import Components.Common.ValidationErrorDialog;
 
+import java.util.Arrays;
+
 public class ExceptionHandler {
     public static void handle(Throwable e) {
         switch (e.getClass().getSimpleName()) {
@@ -15,17 +17,17 @@ public class ExceptionHandler {
                 new ValidationErrorDialog(e.getMessage()).open();
                 break;
             }
-            case "UnknownException": {
-                new UnknowErrorDialog().open();
-                break;
-            }
+//            case "UnknownException": {
+//                new UnknowErrorDialog().open();
+//                break;
+//            }
             case "SerializationException":
             case "DeserializationException": {
                 new ErrorDialog(e.getMessage()).open();
                 break;
             }
             default: {
-                e.printStackTrace();
+                new ErrorDialog(Arrays.toString(e.getStackTrace())).open();
                 break;
             }
         }

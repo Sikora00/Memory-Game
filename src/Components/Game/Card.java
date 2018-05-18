@@ -2,6 +2,8 @@ package Components.Game;
 
 import Configs.Paths;
 import Events.CardOpened.CardOpenedListeners;
+import Repositories.ResourceRepository;
+import Services.ExceptionHandler;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,14 +38,8 @@ public class Card extends JPanel {
     }
 
     public void closeCard() {
-        BufferedImage closedCardImage = null;
-        try {
-            closedCardImage = ImageIO.read(new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "img/card-background.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Image backGroundImage = closedCardImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
+        Image backGroundImage = ResourceRepository.getCardBackgroundImage();
+        backGroundImage = backGroundImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
 
 
         JLabel picLabel = new JLabel(new ImageIcon(backGroundImage));

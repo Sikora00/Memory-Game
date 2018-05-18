@@ -2,6 +2,7 @@ package Factories;
 
 import Components.Game.Card;
 import Configs.Paths;
+import Repositories.ResourceRepository;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,16 +42,12 @@ public class CardsFactory {
         return result;
     }
 
-    private static File[] getAllCardsFiles() {
-        final File dir = new File(Paths.CARDS_IMAGES_DIR);
-        return dir.listFiles();
-    }
 
     private static Image[] getAllCardsImages() {
-        File[] files = CardsFactory.getAllCardsFiles();
+        File[] files = ResourceRepository.getAllCardsFiles();
         Image[] result = new Image[files.length];
         int i = 0;
-        for (File file : CardsFactory.getAllCardsFiles()) {
+        for (File file : files) {
             try {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image = bufferedImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
@@ -62,16 +59,5 @@ public class CardsFactory {
         }
 
         return result;
-    }
-
-
-    public void listFilesForFolder(final File folder) {
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry);
-            } else {
-                System.out.println(fileEntry.getName());
-            }
-        }
     }
 }
