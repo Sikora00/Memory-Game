@@ -34,7 +34,6 @@ public class CardsFactory {
             }
             result.add(new Card(pairId, image));
             result.add(new Card(pairId, image));
-            pairId++;
         }
 
         Collections.shuffle(result);
@@ -62,16 +61,5 @@ public class CardsFactory {
         }
 
         return result;
-    }
-
-
-    public void listFilesForFolder(final File folder) {
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry);
-            } else {
-                System.out.println(fileEntry.getName());
-            }
-        }
     }
 }
