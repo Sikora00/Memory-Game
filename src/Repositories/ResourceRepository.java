@@ -43,4 +43,8 @@ public class ResourceRepository {
 
         return result;
     }
+
+    public static File getRankingStorage() {
+        return  new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "storage/ranking.txt");
+    }
 }
