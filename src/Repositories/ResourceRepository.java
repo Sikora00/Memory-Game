@@ -2,6 +2,7 @@ package Repositories;
 
 import Configs.Paths;
 import Services.ExceptionHandler;
+import Services.Serializer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,18 +12,21 @@ import java.io.IOException;
 
 public class ResourceRepository {
     public static Image getCardBackgroundImage() {
-        BufferedImage closedCardImage = null;
         try {
-            closedCardImage = ImageIO.read(new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "img/card-background.jpg"));
+            return ImageIO.read(Serializer.class.getResourceAsStream(Paths.CARD_BACKGROUND_IMAGE)).getScaledInstance(200, 300, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             ExceptionHandler.handle(e);
         }
-        return closedCardImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
+
+        return null;
     }
 
+    public static File getAllCardImagesDir() {
+        return new File(Serializer.class.getResource(Paths.CARDS_IMAGES_DIR).getFile());
+    }
 
     public static File[] getAllCardsFiles() {
-        final File dir = new File(Paths.CARDS_IMAGES_DIR);
+        final File dir = ResourceRepository.getAllCardImagesDir();
         return dir.listFiles();
     }
 
@@ -45,6 +49,6 @@ public class ResourceRepository {
     }
 
     public static File getRankingStorage() {
-        return  new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "storage/ranking.txt");
+        return new File(Serializer.class.getResource(Paths.RANKING_STORAGE_DIR).getFile());
     }
 }

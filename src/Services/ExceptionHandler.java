@@ -4,6 +4,8 @@ import Components.Common.ErrorDialog;
 import Components.Common.UnknowErrorDialog;
 import Components.Common.ValidationErrorDialog;
 
+import java.util.Arrays;
+
 public class ExceptionHandler {
     public static void handle(Throwable e) {
         switch (e.getClass().getSimpleName()) {
@@ -25,7 +27,7 @@ public class ExceptionHandler {
                 break;
             }
             default: {
-                e.printStackTrace();
+                ExceptionHandler.handle(new UnknownError());
                 break;
             }
         }
