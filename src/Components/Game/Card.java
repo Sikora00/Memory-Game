@@ -33,8 +33,6 @@ public class Card extends JPanel {
 
     public void closeCard() {
         Image backGroundImage = ResourceRepository.getCardBackgroundImage();
-        backGroundImage = backGroundImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
-
 
         JLabel picLabel = new JLabel(new ImageIcon(backGroundImage));
         picLabel.addMouseListener(new MouseAdapter() {

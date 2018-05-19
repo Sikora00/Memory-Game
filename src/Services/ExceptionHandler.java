@@ -17,17 +17,17 @@ public class ExceptionHandler {
                 new ValidationErrorDialog(e.getMessage()).open();
                 break;
             }
-//            case "UnknownException": {
-//                new UnknowErrorDialog().open();
-//                break;
-//            }
+            case "UnknownException": {
+                new UnknowErrorDialog().open();
+                break;
+            }
             case "SerializationException":
             case "DeserializationException": {
                 new ErrorDialog(e.getMessage()).open();
                 break;
             }
             default: {
-                new ErrorDialog(Arrays.toString(e.getStackTrace())).open();
+                ExceptionHandler.handle(new UnknownError());
                 break;
             }
         }

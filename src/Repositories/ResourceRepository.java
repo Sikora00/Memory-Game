@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ResourceRepository {
     public static Image getCardBackgroundImage() {
         try {
-            return ImageIO.read(Serializer.class.getResourceAsStream(Paths.CARD_BACKGROUND_IMAGE));
+            return ImageIO.read(Serializer.class.getResourceAsStream(Paths.CARD_BACKGROUND_IMAGE)).getScaledInstance(200, 300, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             ExceptionHandler.handle(e);
         }
