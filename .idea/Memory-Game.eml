@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/dist/test/Memory-Game"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/.idea"/>
+	</contentEntry>
+	<contentEntry url="file://$MODULE_DIR$/dist"/>
+	<contentEntry url="file://$MODULE_DIR$/dist/production/Memory-Game"/>
+</component>
