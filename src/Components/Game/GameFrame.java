@@ -6,6 +6,7 @@ import Entities.Score;
 import Entities.User;
 import Events.GameFinished.GameFinishedListener;
 import Events.GameFinished.GameFinishedListeners;
+import Repositories.RankingRepository;
 import Services.RankingService;
 import ValueObjects.TimerValue;
 
@@ -52,8 +53,8 @@ public class GameFrame extends JFrame implements GameFinishedListener {
     public void onGameFinished() {
         String username = JOptionPane.showInputDialog("Your Name");
         if (username != null) {
-            Ranking ranking = RankingService.readRankingFromStorage();
-            ranking.addScore(new Score(new User(username), new TimerValue(this.gamePanel.getTimerLabel().getText()).getSeconds(), pairs));
+            Ranking ranking = RankingRepository.getRanking();
+            ranking.addScore(new Score(new User(username), new TimerValue(this.gamePanel.getTimerComponent().getText()).getSeconds(), pairs));
             RankingService.replaceOldRanking(ranking);
         }
         dispose();

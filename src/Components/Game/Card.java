@@ -1,18 +1,12 @@
 package Components.Game;
 
-import Configs.Paths;
 import Events.CardOpened.CardOpenedListeners;
 import Repositories.ResourceRepository;
-import Services.ExceptionHandler;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Card extends JPanel {
     private int id;
