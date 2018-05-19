@@ -1,7 +1,6 @@
 package Components.Ranking;
 
 import Configs.Fonts;
-import Services.RankingService;
 
 import javax.swing.*;
 import java.awt.*;

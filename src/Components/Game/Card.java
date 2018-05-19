@@ -1,16 +1,12 @@
 package Components.Game;
 
-import Configs.Paths;
 import Events.CardOpened.CardOpenedListeners;
+import Repositories.ResourceRepository;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Card extends JPanel {
     private int id;
@@ -36,14 +32,8 @@ public class Card extends JPanel {
     }
 
     public void closeCard() {
-        BufferedImage closedCardImage = null;
-        try {
-            closedCardImage = ImageIO.read(new File(Paths.PATH_TO_ROOT_AFTER_BUILD + "img/card-background.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        Image backGroundImage = closedCardImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
+        Image backGroundImage = ResourceRepository.getCardBackgroundImage();
 
 
         JLabel picLabel = new JLabel(new ImageIcon(backGroundImage));

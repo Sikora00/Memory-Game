@@ -1,20 +1,17 @@
 package Factories;
 
 import Components.Game.Card;
-import Configs.Paths;
+import Repositories.ResourceRepository;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
 public class CardsFactory {
     public static List<Card> createCardsPairs(int pairs) {
         Random random = new Random();
-        List<Image> availableImages = new LinkedList<>(Arrays.asList(CardsFactory.getAllCardsImages()));
+        List<Image> availableImages = new LinkedList<>(Arrays.asList(ResourceRepository.getAllCardsImages()));
         List<Card> result = new ArrayList<Card>();
 
         for (int pairId = 1; pairId <= pairs; pairId++) {
@@ -37,29 +34,6 @@ public class CardsFactory {
         }
 
         Collections.shuffle(result);
-        return result;
-    }
-
-    private static File[] getAllCardsFiles() {
-        final File dir = new File(Paths.CARDS_IMAGES_DIR);
-        return dir.listFiles();
-    }
-
-    private static Image[] getAllCardsImages() {
-        File[] files = CardsFactory.getAllCardsFiles();
-        Image[] result = new Image[files.length];
-        int i = 0;
-        for (File file : CardsFactory.getAllCardsFiles()) {
-            try {
-                BufferedImage bufferedImage = ImageIO.read(file);
-                Image image = bufferedImage.getScaledInstance(200, 300, Image.SCALE_DEFAULT);
-                result[i] = image;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            i++;
-        }
-
         return result;
     }
 }
