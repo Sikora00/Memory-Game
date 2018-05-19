@@ -9,6 +9,7 @@ import Factories.CardsFactory;
 import ValueObjects.TimerValue;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,38 +31,36 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
     }
 
     private void addComponents() {
-        JPanel content = new JPanel(new GridBagLayout());
-        this.addTimerComponent(content);
+        JPanel content = new JPanel(new BorderLayout());
+        addTimerComponent(content);
+        addCardsComponent(content);
+        add(content);
+    }
+
+    private void addCardsComponent(JPanel panel) {
         final JPanel cards = new JPanel(new GridLayout(0, 6));
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 1;
 
         this.cards = CardsFactory.createCardsPairs(cardsNumber / 2);
         for (Card card : this.cards) {
             this.addCard(card, cards);
         }
-
-        addComponentToPanel(cards, content, c);
-
-        add(content);
+        panel.add(cards, BorderLayout.CENTER);
     }
 
     private void addTimerComponent(JPanel panel) {
-        JLabel timerComponent = new JLabel(new TimerValue().toString());
+        JLabel timerComponent = new JLabel(new TimerValue().toString(), SwingConstants.CENTER);
         timerComponent.setFont(new Font(Fonts.MAIN_FONT, Font.BOLD, 30));
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 0;
-        c.ipady = 80;
-        timerComponent.setAlignmentX(Component.CENTER_ALIGNMENT);
+        timerComponent.setBorder(new EmptyBorder(20, 0, 10, 0));
+
         this.timerComponent = timerComponent;
+
         createTimer(timerComponent);
 
-        addComponentToPanel(timerComponent, panel, c);
+        panel.add(timerComponent, BorderLayout.PAGE_START);
     }
 
     private void createTimer(JLabel timerComponent) {
-        int delay = 1000; //milliseconds
+        int delay = 1000;
         ActionListener taskPerformer = (ActionEvent evt) -> {
             TimerValue value = new TimerValue(timerComponent.getText());
             value.addOneSecond();
@@ -73,11 +72,7 @@ public class GamePanel extends JPanel implements GameFinishedListener, CardOpene
     }
 
     private void addCard(Card card, JPanel panel) {
-        this.addComponentToPanel(card, panel, null);
-    }
-
-    private void addComponentToPanel(JComponent component, JPanel panel, GridBagConstraints options) {
-        panel.add(component, options);
+        panel.add(card);
     }
 
     @Override

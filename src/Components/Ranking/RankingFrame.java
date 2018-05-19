@@ -1,6 +1,6 @@
 package Components.Ranking;
 
-import Components.HomeWindow.HomeView;
+import Components.Home.HomeView;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;

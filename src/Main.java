@@ -1,4 +1,4 @@
-import Components.HomeWindow.HomeView;
+import Components.Home.HomeView;
 import Services.ExceptionHandler;
 
 public class Main {

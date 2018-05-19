@@ -1,4 +1,4 @@
-package Components.HomeWindow;
+package Components.Home;
 
 import Components.NewGame.NewGameFrame;
 import Components.Ranking.RankingFrame;

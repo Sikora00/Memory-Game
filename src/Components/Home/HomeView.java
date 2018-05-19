@@ -1,4 +1,4 @@
-package Components.HomeWindow;
+package Components.Home;
 
 import javax.swing.*;
 
@@ -15,7 +15,7 @@ public class HomeView implements Runnable{
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        HomePanel panel = new HomePanel(frame);
+        new HomePanel(frame);
 
         //Display the window.
         frame.pack();

@@ -1,6 +1,6 @@
 package Components.Game;
 
-import Components.HomeWindow.HomeView;
+import Components.Home.HomeView;
 import Entities.Ranking;
 import Entities.Score;
 import Entities.User;
